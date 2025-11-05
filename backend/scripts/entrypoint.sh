@@ -1,5 +1,4 @@
 #!/bin/bash
 
-ls -la /app
-exec python /app/backend.py
+exec python /app/app/backend.py
 

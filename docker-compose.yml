@@ -1,7 +1,7 @@
 services:
-  issue-backend:
+  backend:
     depends_on:
-      issue-nginx:
+      nginx:
         condition: service_healthy
     build:
       context: ./backend
@@ -12,7 +12,7 @@ services:
       - certs:/app/certs
     restart: always
 
-  issue-nginx:
+  nginx:
     image: bitnamilegacy/nginx
     container_name: nginx
     volumes:
