@@ -75,4 +75,39 @@ nginx  | drwxr-xr-x 2 root root 4096 Nov  5 05:05 .
 
 So the `/certs` directory is writable in the first instance and not the second.
 
-The nginx service runs as uid 1001. The backend service runs as uid 0, root. 
+The nginx service runs as uid 1001. The backend service runs as uid 0, root.
+
+# `nginx` service makes `/certs` writeable
+
+If we now remove the shell script from the `nginx` service altogether, along with the configuration file, like this:
+
+```yaml
+  nginx:
+    image: bitnamilegacy/nginx
+    container_name: nginx
+    volumes:
+      - ./logs/nginx/:/var/logs/nginx
+      - ./frontend:/var/www/html
+      - certs:/certs
+      - ./scripts/generate_nginx_certs.sh:/scripts/generate_nginx_certs.sh
+    ports:
+      - 9080:80
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /certs/key.pem && test -f /certs/cert.pem"]
+      interval: 1s
+      timeout: 5s
+      retries: 60
+    restart: unless-stopped
+```
+
+The `/certs` directory looks like this:
+
+```commandline
+jr@JR25:~/Code/elastic-bilara$ docker exec -it nginx bash
+I have no name!@550068fdcd48:/app$ ls -la /certs
+total 16
+drwxrwxr-x 2 root root 4096 Nov  5 11:15 .
+drwxr-xr-x 1 root root 4096 Nov  5 11:15 ..
+-rw-r--r-- 1 1001 root 1809 Nov  5 11:15 tls.crt
+-rw------- 1 1001 root 3272 Nov  5 11:15 tls.key
+```

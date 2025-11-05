@@ -16,14 +16,12 @@ services:
     image: bitnamilegacy/nginx
     container_name: nginx
     volumes:
-      - ./bilara_server_block.conf:/opt/bitnami/nginx/conf/server_blocks/bilara_server_block.conf:ro
       - ./logs/nginx/:/var/logs/nginx
       - ./frontend:/var/www/html
       - certs:/certs
       - ./scripts/generate_nginx_certs.sh:/scripts/generate_nginx_certs.sh
     ports:
       - 9080:80
-    entrypoint: ["/bin/bash", "/scripts/generate_nginx_certs.sh"]
     healthcheck:
       test: ["CMD-SHELL", "test -f /certs/key.pem && test -f /certs/cert.pem"]
       interval: 1s
