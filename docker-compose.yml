@@ -1,4 +1,17 @@
 services:
+  backend:
+#    depends_on:
+#      nginx:
+#        condition: service_healthy
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+    container_name: backend
+    volumes:
+      - ./backend:/app
+      - certs:/app/certs
+    restart: always
+
   nginx:
     image: bitnamilegacy/nginx
     container_name: nginx
