@@ -2,9 +2,10 @@ FROM python:3.11.3
 
 ENV PYTHONUNBUFFERED 1
 
-COPY sleep.py .
-COPY entrypoint.sh .
+WORKDIR /app/
 
-RUN chmod +x /entrypoint.sh
+COPY . .
 
-CMD ["/entrypoint.sh"]
+RUN chmod +x /app/scripts/entrypoint.sh
+
+CMD ["/app/scripts/entrypoint.sh"]
