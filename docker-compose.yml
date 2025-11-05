@@ -1,8 +1,8 @@
 services:
   backend:
-#    depends_on:
-#      nginx:
-#        condition: service_healthy
+    depends_on:
+      nginx:
+        condition: service_healthy
     build:
       context: ./backend
       dockerfile: backend.dockerfile
