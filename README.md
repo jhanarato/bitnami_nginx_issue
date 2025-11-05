@@ -74,3 +74,5 @@ nginx  | drwxr-xr-x 2 root root 4096 Nov  5 05:05 .
 ```
 
 So the `/certs` directory is writable in the first instance and not the second.
+
+The nginx service runs as uid 1001. The backend service runs as uid 0, root. 
