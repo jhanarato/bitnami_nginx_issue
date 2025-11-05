@@ -31,4 +31,7 @@ generate_cert() {
 generate_cert "/certs/localhost.key" "/certs/localhost.crt" "/CN=localhost"
 generate_cert "/certs/key.pem" "/certs/cert.pem" "/CN=localhost"
 
+echo "Contents of nginx service /certs"
+ls -la /certs
+
 exec /opt/bitnami/scripts/nginx/run.sh
