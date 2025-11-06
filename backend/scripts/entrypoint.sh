@@ -3,8 +3,11 @@
 echo "Backend username"
 whoami
 
-echo "Backend UID"
+echo "Backend user id"
 id -u
+
+echo "Backend group id"
+id -g
 
 echo "Contents of backend service /app/certs"
 ls -la /app/certs

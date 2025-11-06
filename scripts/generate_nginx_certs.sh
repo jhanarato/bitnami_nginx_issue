@@ -31,8 +31,11 @@ generate_cert() {
 generate_cert "/certs/localhost.key" "/certs/localhost.crt" "/CN=localhost"
 generate_cert "/certs/key.pem" "/certs/cert.pem" "/CN=localhost"
 
-echo "Nginx UID"
+echo "Nginx user id:"
 id -u
+
+echo "Nginx group id:"
+id -g
 
 echo "Contents of nginx service /certs"
 ls -la /certs
