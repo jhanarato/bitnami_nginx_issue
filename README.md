@@ -106,7 +106,7 @@ If we now remove the shell script from the `nginx` service altogether, along wit
 
 The `/certs` directory looks like this:
 
-```commandline
+```
 jr@JR25:~/Code/elastic-bilara$ docker exec -it nginx bash
 I have no name!@550068fdcd48:/app$ ls -la /certs
 total 16
@@ -127,6 +127,14 @@ user              www www;  ## Default: nobody
 
 So this message might be relevant:
 
-```commandline
+```
 nginx: [warn] the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /opt/bitnami/nginx/conf/nginx.conf:2
+```
+
+### The fix
+
+Adding this line to `backend.dockerfile` solves the problem:
+
+```dockerfile
+RUN chmod g+w /app/certs
 ```
