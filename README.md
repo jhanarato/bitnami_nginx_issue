@@ -115,3 +115,18 @@ drwxr-xr-x 1 root root 4096 Nov  5 11:15 ..
 -rw-r--r-- 1 1001 root 1809 Nov  5 11:15 tls.crt
 -rw------- 1 1001 root 3272 Nov  5 11:15 tls.key
 ```
+
+Nginx configuration starts with this:
+
+```
+jr@JR25:~/Code/bitnami_nginx_issue$ docker exec -it nginx bash
+I have no name!@a1882bbb2c41:/app$ cat /opt/bitnami/nginx/conf/nginx.conf
+# Based on https://www.nginx.com/resources/wiki/start/topics/examples/full/#nginx-conf
+user              www www;  ## Default: nobody
+```
+
+So this message might be relevant:
+
+```commandline
+nginx: [warn] the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /opt/bitnami/nginx/conf/nginx.conf:2
+```
