@@ -81,7 +81,7 @@ The nginx service runs as uid 1001. The backend service runs as uid 0, root.
 
 Both run as group root
 
-# `nginx` service makes `/certs` writeable
+# `nginx` service makes `/certs` writeable by group
 
 If we now remove the shell script from the `nginx` service altogether, along with the configuration file, like this:
 
